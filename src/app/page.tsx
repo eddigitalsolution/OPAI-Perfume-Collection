@@ -148,17 +148,23 @@ export default function Home() {
             className={`theme-btn raining ${activeTheme === "raining" ? "active" : ""}`}
             onClick={() => setActiveTheme("raining")}
             aria-label="Raining Day Theme"
-          />
+          >
+            Raining
+          </button>
           <button 
             className={`theme-btn beach ${activeTheme === "beach" ? "active" : ""}`}
             onClick={() => setActiveTheme("beach")}
             aria-label="Sunshine Beach Theme"
-          />
+          >
+            Sunny
+          </button>
           <button 
             className={`theme-btn city ${activeTheme === "city" ? "active" : ""}`}
             onClick={() => setActiveTheme("city")}
             aria-label="Midnight Busy City Theme"
-          />
+          >
+            City
+          </button>
         </div>
       </header>
 
