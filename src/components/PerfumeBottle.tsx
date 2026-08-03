@@ -49,7 +49,7 @@ function BottleModel({
   modelPath: string;
   onLoaded: (scene: THREE.Group) => void;
 }) {
-  const { scene } = useGLTF(modelPath);
+  const { scene } = useGLTF(modelPath, true);
 
   // Clone scene to allow multiple independent instances
   const clonedScene = useMemo(() => {
@@ -165,6 +165,7 @@ export default function PerfumeBottle({
 }
 
 // Preload all GLB models at module level for instant rendering
-useGLTF.preload("/3d asset/summer rock.glb");
-useGLTF.preload("/3d asset/main in the mirror.glb");
-useGLTF.preload("/3d asset/rush hour.glb");
+useGLTF.preload("/3d asset/summer rock.glb", true);
+useGLTF.preload("/3d asset/main in the mirror.glb", true);
+useGLTF.preload("/3d asset/rush hour.glb", true);
+
