@@ -253,6 +253,16 @@ header * {
   color: var(--gold-color);
 }
 
+@media (max-width: 600px) {
+  .loading-logo {
+    font-size: 1.15rem;
+    letter-spacing: 0.22em;
+    text-align: center;
+    padding: 0 1.5rem;
+    line-height: 1.6;
+  }
+}
+
 @keyframes fadeInLogo {
   to {
     opacity: 1;
