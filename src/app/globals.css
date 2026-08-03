@@ -1390,18 +1390,7 @@ footer {
 
 @media (max-width: 991px) {
   .logo {
-    display: block !important;
-    font-family: var(--font-serif);
-    font-size: 1.3rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-
-  .logo span {
-    color: var(--gold-color);
+    display: none !important;
   }
 
   header {
