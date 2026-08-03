@@ -170,7 +170,6 @@ function SceneContent({
 
   return (
     <>
-      {theme !== "beach" && <color attach="background" args={[themeColors.bg]} />}
       {theme !== "beach" && <fog attach="fog" args={[themeColors.bg, 5, 20]} />}
 
       <PerspectiveCamera makeDefault fov={45} near={0.1} far={50} />
@@ -202,6 +201,24 @@ function SceneContent({
         castShadow
         shadow-mapSize={[1024, 1024]}
         color="#ffffff"
+      />
+
+      {/* Dramatic Top Spotlight focused directly on the selected product */}
+      <spotLight
+        position={[0, 10, 0]}
+        angle={0.5}
+        penumbra={0.9}
+        intensity={activeBottleId !== null ? 35.0 : 0.0}
+        color={themeColors.rim}
+        castShadow
+        shadow-mapSize={[1024, 1024]}
+      />
+
+      {/* Volumetric spotlight beam effect */}
+      <VolumetricSpotlight
+        active={activeBottleId !== null}
+        color={themeColors.rim}
+        isMobile={isMobile}
       />
 
       {/* 3. Rim Backlight for luxury glass outlines */}
@@ -311,4 +328,47 @@ function BottleLayoutWrapper({
   });
 
   return <group ref={groupRef}>{children}</group>;
+}
+
+// Volumetric spotlight beam effect
+function VolumetricSpotlight({
+  active,
+  color,
+  isMobile,
+}: {
+  active: boolean;
+  color: string;
+  isMobile: boolean;
+}) {
+  const meshRef = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    if (!meshRef.current) return;
+    const time = state.clock.getElapsedTime();
+    const targetOpacity = active ? 0.09 + Math.sin(time * 1.5) * 0.02 : 0;
+
+    // Smooth transition
+    if (meshRef.current.material) {
+      const mat = meshRef.current.material as THREE.MeshBasicMaterial;
+      mat.opacity = THREE.MathUtils.lerp(mat.opacity, targetOpacity, 0.08);
+    }
+  });
+
+  return (
+    <mesh
+      ref={meshRef}
+      position={[0, active ? (isMobile ? 2.9 : 1.5) : 1.5, 0]}
+      rotation={[0, 0, 0]}
+    >
+      <cylinderGeometry args={[0.1, 2.5, 9, 64, 1, true]} />
+      <meshBasicMaterial
+        color={color}
+        transparent
+        opacity={0}
+        depthWrite={false}
+        side={THREE.DoubleSide}
+        blending={THREE.AdditiveBlending}
+      />
+    </mesh>
+  );
 }

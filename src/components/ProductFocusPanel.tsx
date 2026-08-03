@@ -11,21 +11,6 @@ interface ProductFocusPanelProps {
   onAddToCart: (perfume: BottleConfig, size: string, qty: number, finalPrice: string) => void;
 }
 
-const REVIEWS_MAP: Record<string, { author: string; text: string }> = {
-  "summer-rock": {
-    author: "Marcus L.",
-    text: "Summer Rock is a total masterpiece. The pineapple and berries smell incredibly fresh, and it gets so many compliments during hot days!"
-  },
-  "man-in-the-mirror": {
-    author: "Sophia R.",
-    text: "Man in the Mirror is a sophisticated, bold scent. The transition from bergamot to sandalwood and vanilla is beautifully smooth."
-  },
-  "rush-hour": {
-    author: "Julian K.",
-    text: "Rush Hour is seductive and intense. The cinnamon and tobacco notes are warm and perfect for formal evenings. Outstanding longevity!"
-  }
-};
-
 export default function ProductFocusPanel({
   perfume,
   onClose,
@@ -47,8 +32,6 @@ export default function ProductFocusPanel({
       document.body.classList.remove("mobile-panel-expanded");
     };
   }, [isMobileExpanded]);
-
-  const review = REVIEWS_MAP[perfume.id];
 
   // Framer Motion variants
   const panelVariants: Variants = {
@@ -163,22 +146,10 @@ export default function ProductFocusPanel({
           </div>
         </motion.div>
 
-        {/* Review Section */}
-        {review && (
-          <motion.div className="product-review-panel mobile-hide-on-collapse" variants={itemVariants}>
-            <h4>Customer Review</h4>
-            <div className="review-box">
-              <div className="review-stars">⭐⭐⭐⭐⭐</div>
-              <p className="review-quote">&quot;{review.text}&quot;</p>
-              <div className="review-author">- {review.author}</div>
-            </div>
-          </motion.div>
-        )}
-
         {/* Actions Group */}
         <motion.div className="cta-group mobile-hide-on-collapse" variants={itemVariants} style={{ marginTop: "2rem" }}>
           <a
-            href="https://opaifragrance.com?sca_ref=11198086.D2HOIpgHyz"
+            href="https://www.opaifragrance.com/?ref=yazim&s=simulator2"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-buy-now"
